@@ -1,1 +1,39 @@
+# Project-local (not in repo)
 /docs/
+/.osp/
+/scripts/
+
+# IDE
+**/.idea/
+*.code-workspace
+*.elc
+*.esproj
+*.komodoproject
+*.sublime*
+*.tmproj*
+
+# Dependencies
+**/node_modules/
+wp-content/themes/understrap-child-1.2.0/vendor/
+bower_components/
+
+# Logs, backups, archives
+*.bak
+*.cvs
+*.db
+*.diff
+*.err
+*.log
+*.orig
+*.rej
+*.zip
+
+# Lock files
+*.lock
+!composer.lock
+
+# Theme: understrap-child build and tooling
+wp-content/themes/understrap-child-1.2.0/dist/
+wp-content/themes/understrap-child-1.2.0/dist-product/
+wp-content/themes/understrap-child-1.2.0/phpcs.xml
+wp-content/themes/understrap-child-1.2.0/**/img
