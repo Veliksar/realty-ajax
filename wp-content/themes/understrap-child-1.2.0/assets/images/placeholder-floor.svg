@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400" role="img" aria-label="Floor plan placeholder">
+  <rect width="400" height="400" fill="#eef1f6"/>
+  <rect x="40" y="40" width="320" height="320" fill="#fff" stroke="#b8955a" stroke-width="2"/>
+  <line x1="200" y1="40" x2="200" y2="360" stroke="#c5cdd8" stroke-width="1"/>
+  <line x1="40" y1="200" x2="360" y2="200" stroke="#c5cdd8" stroke-width="1"/>
+  <rect x="60" y="60" width="120" height="120" fill="#e8ecf2"/>
+  <rect x="220" y="60" width="120" height="120" fill="#e8ecf2"/>
+  <rect x="60" y="220" width="120" height="120" fill="#e8ecf2"/>
+  <rect x="220" y="220" width="120" height="80" fill="#e8ecf2"/>
+  <rect x="220" y="310" width="120" height="30" fill="#b8955a" opacity="0.3"/>
+  <text x="200" y="390" text-anchor="middle" fill="#5c6678" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">FLOOR PLAN</text>
+</svg>

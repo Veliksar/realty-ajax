@@ -26,10 +26,10 @@ define( 'DB_NAME', 'realty_etcetera_db' );
 define( 'DB_USER', 'root' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'root' );
+define( 'DB_PASSWORD', '' );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'MySQL-8.4' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -79,7 +79,13 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false );
+define( 'WP_DISABLE_FATAL_ERROR_HANDLER', false );
+
+@ini_set( 'display_errors', '0' );
+@ini_set( 'log_errors', '1' );
 
 /* Add any custom values between this line and the "stop editing" line. */
 

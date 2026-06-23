@@ -8,7 +8,7 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-
+require_once get_stylesheet_directory() . '/inc/realty-helpers.php';
 
 /**
  * Removes the parent themes stylesheet and scripts from inc/enqueue.php
@@ -29,15 +29,19 @@ add_action( 'wp_enqueue_scripts', 'understrap_remove_scripts', 20 );
  */
 function theme_enqueue_styles() {
 
-	// Get the theme data.
 	$the_theme = wp_get_theme();
 
 	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-	// Grab asset urls.
 	$theme_styles  = "/css/child-theme{$suffix}.css";
 	$theme_scripts = "/js/child-theme{$suffix}.js";
 
-	wp_enqueue_style( 'child-understrap-styles', get_stylesheet_directory_uri() . $theme_styles, array(), $the_theme->get( 'Version' ) );
+	wp_enqueue_style(
+		'realty-fonts',
+		'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap',
+		array(),
+		null
+	);
+	wp_enqueue_style( 'child-understrap-styles', get_stylesheet_directory_uri() . $theme_styles, array( 'realty-fonts' ), $the_theme->get( 'Version' ) );
 	wp_enqueue_script( 'jquery' );
 	wp_enqueue_script( 'child-understrap-scripts', get_stylesheet_directory_uri() . $theme_scripts, array(), $the_theme->get( 'Version' ), true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -129,90 +133,3 @@ function active_ajax_ajax_url() { ?>
 	</script>
 <?php }
 
-function load_posts() {
-	$result_array = array();
-//    $result_array['current_page'] = (int) $_POST['paged'] + 1;
-//    $_POST['blog_category'][1];
-
-	$blog_cat_param = $_POST['blog_category'] ?? ''; //form fields
-	$blog_search_alph = $_POST['search_alph'] ?? '';
-	$blog_search_raiting = $_POST['search_raiting'] ?? '';
-	$blog_search_raiting_order = $_POST['search_raiting_order'] ?? '';
-	$type_build = $_POST['type_build'] ?? '';
-	$paged = $_POST['paged'] ?? '';
-
-	if (isset($blog_search_raiting) && !empty($blog_search_raiting) && $blog_search_raiting >= 1 && isset($blog_search_raiting_order) && !empty($blog_search_raiting_order)) {
-		if ($blog_search_raiting_order == 'DESC') {
-			$compare = '<=';
-		} else if ($blog_search_raiting_order == 'ASC') {
-			$compare = '>=';
-		} else {
-			$compare = '=';
-		}
-	}
-
-	$args = array(
-		'post_type' => 'realty',
-		'posts_per_page' => 5,
-		'paged' => $paged,
-        'meta_query' => array(
-	        'key' => 'ecological',
-	        'value' => $blog_search_raiting,
-	        'compare' => $compare,
-        ),
-		'orderby' => 'meta_value_num',
-	);
-
-	if (isset($blog_search_raiting_order) && !empty($blog_search_raiting_order)) {
-		$args['order'] = $blog_search_raiting_order;
-	}
-
-	if ( $blog_search_alph !== '') {
-		$args['starts_with'] = $blog_search_alph;
-	}
-
-	if ( $type_build !== '') {
-		$args['meta_query'][] = array(
-			'value' => $type_build,
-		);
-	}
-
-	if ($blog_cat_param !== '') {
-		$args['tax_query'][] = array(
-			'taxonomy' => 'district',
-			'field' => 'slug',
-			'terms' => $blog_cat_param
-		);
-	}
-
-	if (isset($args['tax_query']) && !empty($args['tax_query']) && count($args['tax_query']) > 1) {
-		$args['tax_query']['relation'] = 'AND';
-	}
-
-	$query = new WP_Query ($args);
-	$i = 0;
-	ob_start();
-	if ($query->have_posts()) {
-		echo '<div class="row">';
-		while ($query->have_posts()) {
-			$query->the_post();
-            get_template_part('loop-templates/content', 'ajax');
-		}
-		echo '</div>';
-		foundation_pagination($query);
-		$result_array['posts'] = ob_get_clean();
-	} else {
-		// no posts found
-	}
-	$result_array['found_posts'] = $query->found_posts;
-	/* Restore original Post Data */
-	wp_reset_postdata();
-
-
-
-	wp_send_json_success($result_array);
-	wp_die();
-}
-
-add_action('wp_ajax_ajax_handler','load_posts');
-add_action('wp_ajax_nopriv_ajax_handler','load_posts');

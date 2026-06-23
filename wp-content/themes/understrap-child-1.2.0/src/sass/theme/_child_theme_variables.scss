@@ -1,7 +1,20 @@
-// Use this file to overwrite the basic Bootstrap variables and add your own variables
-// To overwrite a Bootstrap variable you don´t have to touch the Bootstrap folder.
-// Just copy a variable from src/sass/assets/bootstrap5/_variables.scss, paste it here and edit the value.
+$re-navy:        #0b1424;
+$re-navy-mid:    #152238;
+$re-navy-light:  #1e3050;
+$re-gold:        #b8955a;
+$re-gold-light:  #d4b87a;
+$re-slate:       #5c6678;
+$re-mist:        #eef1f6;
+$re-white:       #ffffff;
+$re-border:      rgba(184, 149, 90, 0.25);
 
-
-$purple: #5533ff; // Thats a sample how you could change a BootStrap variable.
-$primary: $purple;  // Once we've changed the value, we'll also make it the primary brand color.
+$primary:   $re-navy;
+$secondary: $re-gold;
+$body-bg:   $re-white;
+$body-color: $re-navy;
+$link-color: $re-gold;
+$link-hover-color: $re-gold-light;
+$font-family-sans-serif: "DM Sans", system-ui, -apple-system, sans-serif;
+$headings-font-family: "Cormorant Garamond", Georgia, serif;
+$border-radius: 0.25rem;
+$border-radius-lg: 0.5rem;
