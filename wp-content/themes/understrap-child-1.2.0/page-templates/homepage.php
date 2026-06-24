@@ -50,7 +50,7 @@ $faq_items       = array(
 		<div class="container re-hero__content">
 			<p class="re-hero__eyebrow">Realty Etcetera</p>
 			<h1 class="re-hero__title">Corporate Real Estate, Curated for Growth</h1>
-			<p class="re-hero__subtitle">Discover premium office and business spaces with transparent data on location, building type, and environmental performance.</p>
+			<p class="re-hero__subtitle">Discover premium office and business spaces with transparent data on location, building type, and environmental performance. Browse our catalog of properties and find the perfect space for your business.</p>
 			<div class="re-hero__stats">
 				<div>
 					<div class="re-hero__stat-value"><?php echo esc_html( wp_count_posts( 'realty' )->publish ); ?>+</div>
